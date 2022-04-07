@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corp. 2003, 2008.  All rights reserved.
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM
+ * Corp.
+ *
+ * DISCLAIMER OF WARRANTIES.  The following [enclosed] code is
+ * sample code created by IBM Corporation.  This sample code is
+ * not part of any standard or IBM product and is provided to you
+ * solely for the purpose of assisting you in the development of
+ * your applications.  The code is provided "AS IS", without
+ * warranty of any kind.  IBM shall not be liable for any damages
+ * arising out of your use of the sample code, even if they have
+ * been advised of the possibility of such damages.
+ *
+ =================================================================
+-->
+
+<request 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="PortalConfig_8.0.0.xsd"
+    type="update" create-oids="true">
+	<portal action="locate">
+        <!-- Sample for deploying themes and skins in an XML script. Note that this only created the database entries;
+             you still need to provide the rendering JSPs under the resource root directories specified in the XML. -->
+
+		<skin action="update" active="true" objectid="hedgehogSkin" uniquename="ibm.portal.skin.Hedgehog" resourceroot="Hedgehog">
+			<localedata locale="en">
+				<title>Hedgehog</title>
+                <description>A skin with lots of spikes!</description>
+			</localedata>
+		</skin>
+		<theme action="update" active="true" defaultskinref="hedgehogSkin" uniquename="ibm.portal.theme.Forest" resourceroot="Forest">
+			<localedata locale="en">
+				<title>A natural theme</title>
+			</localedata>
+            <!-- There's only one skin that may be combined with this theme. -->
+			<allowed-skin skin="hedgehogSkin" update="set"/>
+		</theme>
+
+	</portal>
+</request>

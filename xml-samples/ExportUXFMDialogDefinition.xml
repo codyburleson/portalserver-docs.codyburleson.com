@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corp. 2014.  All rights reserved.
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM
+ * Corp.
+ *
+ * DISCLAIMER OF WARRANTIES.  The following [enclosed] code is
+ * sample code created by IBM Corporation.  This sample code is
+ * not part of any standard or IBM product and is provided to you
+ * solely for the purpose of assisting you in the development of
+ * your applications.  The code is provided "AS IS", without
+ * warranty of any kind.  IBM shall not be liable for any damages
+ * arising out of your use of the sample code, even if they have
+ * been advised of the possibility of such damages.
+ *
+ =================================================================
+-->
+<request type="update" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="PCM_2.0.xsd">
+
+    <!-- export all dialog definitions that are currently deployed -->
+    <portal action="export">
+        <dialog-set>
+            <dialog name="*" />
+        </dialog-set>
+    </portal>
+    
+    <!-- export a single dialog definition with unique name dialog1 -->
+    <portal action="export">
+        <dialog-set>
+            <dialog name="dialog1" />
+        </dialog-set>
+    </portal>
+    
+    <!-- export multiple dialog definitions with unique names dialog1 and dialog2 -->
+    <portal action="export">
+        <dialog-set>
+            <dialog name="dialog1" />
+            <dialog name="dialog2" />
+        </dialog-set>
+    </portal>
+    
+    <!-- export multiple dialog definitions with unique names matching a particular wildcard specification -->
+    <portal action="export">
+        <dialog-set>
+            <dialog name="dialog*" />
+        </dialog-set>
+    </portal>
+</request>
+

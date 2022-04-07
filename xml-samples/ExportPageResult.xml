@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corp. 2003, 2008.  All rights reserved.
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM
+ * Corp.
+ *
+ * DISCLAIMER OF WARRANTIES.  The following [enclosed] code is
+ * sample code created by IBM Corporation.  This sample code is
+ * not part of any standard or IBM product and is provided to you
+ * solely for the purpose of assisting you in the development of
+ * your applications.  The code is provided "AS IS", without
+ * warranty of any kind.  IBM shall not be liable for any damages
+ * arising out of your use of the sample code, even if they have
+ * been advised of the possibility of such damages.
+ *
+ =================================================================
+-->
+
+<request type="update" version="7.0.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="PortalConfig_8.0.0.xsd">
+    <portal action="locate">
+        <web-app action="locate" domain="rel" objectid="Z1_CGAH47L00O9U30I2I5AQ9H0GL7" uid="com.ibm.wps.cp.portlet.tagcloud.webmod">
+	    <servlet action="locate" domain="rel" name="Tag Cloud" objectid="ZV_CGAH47L008OQD0I2B9RPT42O45"/>
+            <portlet-app action="locate" domain="rel" name="com.ibm.wps.cp.portlet.tagcloud" objectid="Z2_CGAH47L00OO150I2UJUL0S1O41" uid="com.ibm.wps.cp.portlet.tagcloud">
+                <portlet action="locate" domain="rel" name="Tag Cloud" objectid="Z3_CGAH47L00O9U30I2I5AQ9H0GD2" />
+            </portlet-app>
+        </web-app>
+        <content-node action="locate" domain="rel" objectid="Z6_000000000000000000000000A0" uniquename="wps.content.root"/>
+        <content-node action="locate" domain="rel" objectid="Z6_CGAH47L000S090I2IP1SB130A7" uniquename="ibm.portal.Home"/>
+        <content-node action="update" active="true" allportletsallowed="true" content-parentref="Z6_CGAH47L000S090I2IP1SB130A7" create-type="explicit" domain="rel" objectid="Z6_2QC68B1A0GR170I26VOD950002" ordinal="1500" type="staticpage" uniquename="ibm.portal.ssa.SamplePage">
+            <localedata locale="en">
+                <title>Sample Page</title>
+            </localedata>
+            <pagecontents display-option="inline" markup="html">
+                <content>UEsDBBQACAAIALKbTDcAAAAAAAAAAAAAAAALAAAAaW5kZXgxLmh0bWxtUE1rwzAMvQf6H0TuTeh1ZL7stFsghZ5VW2sEjmxir1n//YTdbDAGOoj3IelpmAmdOTRD5uzJTLhETzBlzGxhxBsNfWVU0u/aa3APc9AmmvPMCbQQUvVE9QB9lTkdFLpAMyYIQhDDquPyu6heLMGFvA0LwVjxDurcHX7Khz6WhY7vYD2m9No+maMNkpGF1hYEF/oh3nb81Jr/nRuLC9sf26WAp1bzPPwvfHT0wcKZg7xsMXWx2y88B81wneJMa02BvizsdWO5uTZNiTV6wkRw58QZPvVtNz2xhFNdfWvzDVBLBwjDeEQR4AAAAJMBAABQSwECFAAUAAgACACym0w3w3hEEeAAAACTAQAACwAAAAAAAAAAAAAAAAAAAAAAaW5kZXgxLmh0bWxQSwUGAAAAAAEAAQA5AAAAGQEAAAAA</content>
+            </pagecontents>
+            <parameter name="com.ibm.portal.bookmarkable" type="string" update="set"><![CDATA[Yes]]></parameter>
+            <parameter name="com.ibm.portal.friendly.name" type="string" update="set"><![CDATA[staticpage2]]></parameter>
+            <parameter name="com.ibm.portal.static.page.file.name.html" type="string" update="set"><![CDATA[index1.html]]></parameter>
+            <access-control externalized="false" owner="uid=wpsadmin,o=defaultwimfilebasedrealm" private="false"/>
+            <component action="update" active="true" deletable="undefined" domain="rel" modifiable="undefined" objectid="Z7_2QC68B1A0GR170I26VOD950001" ordinal="100" orientation="V" skinref="undefined" type="container" width="undefined">
+                <component action="update" active="true" deletable="undefined" domain="rel" modifiable="undefined" objectid="Z7_2QC68B1A0GR170I26VOD950005" ordinal="100" orientation="V" skinref="undefined" type="container" width="undefined"/>
+                <component action="update" active="true" deletable="undefined" domain="rel" modifiable="undefined" objectid="Z7_2QC68B1A0GR170I26VOD950003" ordinal="100" orientation="H" skinref="undefined" type="container" width="undefined">
+                    <parameter name="com.ibm.portal.layoutnode.localname" type="string" update="set"><![CDATA[portletContainer1]]></parameter>
+                    <component action="update" active="true" deletable="undefined" domain="rel" modifiable="undefined" objectid="Z7_2QC68B1A0GR170I26VOD950007" ordinal="100" skinref="undefined" type="control" width="undefined">
+                        <parameter name="com.ibm.portal.layoutnode.localname" type="string" update="set"><![CDATA[portletWindow1]]></parameter>
+                        <portletinstance action="update" domain="rel" objectid="Z5_2QC68B1A0GR170I26VOD9500G0" portletref="Z3_CGAH47L00O9U30I2I5AQ9H0GD2"/>
+                    </component>
+                </component>
+            </component>
+        </content-node>
+    </portal>
+    <status element="all" result="ok"/>
+</request>

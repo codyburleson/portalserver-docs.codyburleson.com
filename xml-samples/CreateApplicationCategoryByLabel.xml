@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corp. 2003, 2010.  All rights reserved.
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM
+ * Corp.
+ *
+ * DISCLAIMER OF WARRANTIES.  The following [enclosed] code is
+ * sample code created by IBM Corporation.  This sample code is
+ * not part of any standard or IBM product and is provided to you
+ * solely for the purpose of assisting you in the development of
+ * your applications.  The code is provided "AS IS", without
+ * warranty of any kind.  IBM shall not be liable for any damages
+ * arising out of your use of the sample code, even if they have
+ * been advised of the possibility of such damages.
+ *
+ =================================================================
+-->
+
+<request type="update" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="PortalConfig_8.5.0.xsd">
+    <portal action="locate">
+        
+        <!-- 
+            Sample for registering a new application category underneath the application root category.
+            This variant registers a category by adding a label underneath the application category root label that serves as a container for child pages that hold the portlets that are supposed to become part of the category.
+        -->
+                
+        <content-node action="locate" domain="rel" uniquename="wps.content.root"/>   
+        <content-node action="locate" domain="rel" uniquename="ibm.portal.HiddenPages"/>
+        <content-node action="locate" domain="rel" uniquename="ibm.portal.toolbar.applications.category.label.root"/>
+
+        <!-- add the label representing the new category -->
+        <content-node action="update" active="true" content-parentref="ibm.portal.toolbar.applications.category.label.root" domain="rel" ordinal="300" type="label" uniquename="ibm.portal.toolbar.applications.category.label.sample2">
+            <supported-markup markup="html" update="set"/>
+            <localedata locale="en" >
+              <title>Sample Category 2</title>
+            </localedata>            
+            <parameter name="com.ibm.portal.IgnoreAccessControlInCaches" type="string" update="set"><![CDATA[false]]></parameter>
+            <parameter name="com.ibm.portal.navigation.follow_internal_urls" type="string" update="set"><![CDATA[true]]></parameter>
+            <parameter name="com.ibm.portal.remote-cache-expiry" type="string" update="set"><![CDATA[86400]]></parameter>
+            <parameter name="com.ibm.portal.remote-cache-scope" type="string" update="set"><![CDATA[NON-SHARED]]></parameter>
+            <access-control externalized="false" owner="undefined" private="false">
+                <role actionset="User" update="set">
+                    <mapping subjectid="all authenticated portal users" subjecttype="user_group" update="set"/>
+                </role>
+            </access-control>            
+        </content-node>   
+        
+        <!-- add a page that holds a portlet supposed to become part of the new category -->
+        <content-node action="update" active="true" content-parentref="ibm.portal.toolbar.applications.category.label.sample2" domain="rel" ordinal="300" type="page" uniquename="ibm.portal.toolbar.applications.category.label.sample2.about">
+            <supported-markup markup="html" update="set"/>
+            <localedata locale="en" >
+              <title>About WebSphere Portal</title>
+            </localedata>            
+            <parameter name="com.ibm.portal.IgnoreAccessControlInCaches" type="string" update="set"><![CDATA[false]]></parameter>
+            <parameter name="com.ibm.portal.navigation.follow_internal_urls" type="string" update="set"><![CDATA[true]]></parameter>
+            <parameter name="com.ibm.portal.remote-cache-expiry" type="string" update="set"><![CDATA[86400]]></parameter>
+            <parameter name="com.ibm.portal.remote-cache-scope" type="string" update="set"><![CDATA[NON-SHARED]]></parameter>
+            <access-control externalized="false" owner="undefined" private="false">
+                <role actionset="User" update="set">
+                    <mapping subjectid="all authenticated portal users" subjecttype="user_group" update="set"/>
+                </role>
+            </access-control>      
+            <component action="create" ordinal="100" type="container" orientation="H">
+                <component action="create" ordinal="100" type="control" skinref="undefined">
+                    <!-- portletref must match the objectid attribute of portlet -->
+                    <portletinstance action="update" portletref="wps.p.Welcome"/>
+                </component>
+            </component>                 
+        </content-node>
+           
+    </portal>
+</request>

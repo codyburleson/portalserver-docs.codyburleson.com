@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corp. 2007.  All rights reserved.
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM
+ * Corp.
+ *
+ * DISCLAIMER OF WARRANTIES.  The following [enclosed] code is
+ * sample code created by IBM Corporation.  This sample code is
+ * not part of any standard or IBM product and is provided to you
+ * solely for the purpose of assisting you in the development of
+ * your applications.  The code is provided "AS IS", without
+ * warranty of any kind.  IBM shall not be liable for any damages
+ * arising out of your use of the sample code, even if they have
+ * been advised of the possibility of such damages.
+ *
+ =================================================================
+-->
+
+<request
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="PortalConfig_8.0.0.xsd"
+    type="update">
+
+    <!-- Sample for integrating a remote portlet via WSRP.
+         Replace REMOTE_HANDLE with the handle that
+         identifies the remote portlet on the producer.
+         
+         NOTE: This sample file needs to be updated with values for an existing producer 
+               and an existing remote portlet.
+      -->
+    <portal action="locate">
+
+         <wsrp-producer action="locate" objectid="Producer_OID" uniquename="ibm.portal.SampleProducer"/>
+         
+         <web-app action="locate" uid="com.ibm.wps.wsrp.proxyportletapp.webmod">
+             <servlet action="update" objectid="Servlet_OID" remotehandle="REMOTE_HANDLE" wsrp-producerref="Producer_OID"/>
+             <portlet-app action="locate" uid="com.ibm.wps.wsrp.proxyportletapp">
+                <portlet action="update" active="true" defaultlocale="en" 
+                   servletref="Servlet_OID" name="A_WSRP_Remote_Portlet_Name">
+                   <localedata locale="en">
+                       <title>A WSRP remote portlet title</title>
+                   </localedata>
+                   <access-control externalized="false" owner="undefined" private="false"/>
+                </portlet>
+             </portlet-app>
+          </web-app>
+    </portal>
+</request>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corp. 2005, 2006.  All rights reserved.
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM
+ * Corp.
+ *
+ * DISCLAIMER OF WARRANTIES.  The following [enclosed] code is
+ * sample code created by IBM Corporation.  This sample code is
+ * not part of any standard or IBM product and is provided to you
+ * solely for the purpose of assisting you in the development of
+ * your applications.  The code is provided "AS IS", without
+ * warranty of any kind.  IBM shall not be liable for any damages
+ * arising out of your use of the sample code, even if they have
+ * been advised of the possibility of such damages.
+ *
+ =================================================================
+-->
+
+<request xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:noNamespaceSchemaLocation="PortalConfig_8.0.0.xsd" 
+         type="update" create-oids="true">
+         
+    <!-- 
+         NOTE: This sample file needs to be modified before execution.
+    -->
+    <portal action="locate">
+
+        <!-- Use the predeployed attribute to indicate that the URL of the Web application is the location in the file system 
+                to where the EAR file with the contained WAR file has been extracted. -->   
+        <web-app action="update" uid="my.test.web-app" active="true" predeployed="true">
+
+            <!-- In this case, the URL points to the root directory of the extracted WAR file in the portal server directory. -->
+            <url>file://localhost/D:/WebSphere/deploy_target_directory/installedApps/myapp.ear/myportletapp.war</url>
+
+            <!-- The context root that is assigned to the web application of the portlet application in the 
+                 predeployed EAR file (reference: application.xml). must start with a slash -->
+            <context-root>/my/context/root</context-root>
+
+            <!-- The name that is assigned to the application in the predeployed EAR file (reference: application.xml). -->
+            <display-name>My Web App</display-name>
+
+            <portlet-app action="update" active="true" name="My portlet app" uid="my.test.portlet-app">
+                <portlet action="update" active="true" name="My Portlet"/>
+            </portlet-app>
+        </web-app>
+    </portal>
+</request>

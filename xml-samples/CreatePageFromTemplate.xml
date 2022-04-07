@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corp. 2003, 2010.  All rights reserved.
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM
+ * Corp.
+ *
+ * DISCLAIMER OF WARRANTIES.  The following [enclosed] code is
+ * sample code created by IBM Corporation.  This sample code is
+ * not part of any standard or IBM product and is provided to you
+ * solely for the purpose of assisting you in the development of
+ * your applications.  The code is provided "AS IS", without
+ * warranty of any kind.  IBM shall not be liable for any damages
+ * arising out of your use of the sample code, even if they have
+ * been advised of the possibility of such damages.
+ *
+ =================================================================
+-->
+
+<request
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="PortalConfig_8.0.0.xsd"
+    type="update"
+    create-oids="true">
+
+    <!-- Sample for creating a page that contains an existing portlet. 
+         This sample is very similar to DeployPortlet; the difference is that the portlet
+         is not deployed (update actions) but only found (locate action).
+         This sample also demonstrates how to set the skin for the new portlet and how 
+         NLS settings (page title and description) can be read from property files. -->
+    <portal action="locate">
+        
+        <!-- uid must match uid attribute of portlet-app in portlet.xml -->
+        <web-app action="locate" uid="com.ibm.wps.cp.portlet.tagcloud.webmod">
+           <!-- uid must match uid attribute of concrete-portlet-app in portlet.xml -->
+           <portlet-app action="locate" uid="com.ibm.wps.cp.portlet.tagcloud">
+                <!-- name must match content of portlet-name subtag  of concrete-portlet in portlet.xml -->
+                <portlet action="locate" objectid="theExamplePortlet" name="Tag Cloud">
+                </portlet>
+            </portlet-app>
+        </web-app>
+
+        <!-- Parent element under which the new page is inserted -->
+        <content-node action="locate" objectid="parentPage" uniquename="ibm.portal.Home"/>
+
+        <content-node action="update" active="true" allportletsallowed="true" content-parentref="parentPage" create-type="explicit" domain="rel" ordinal="last" type="staticpage" uniquename="ibm.portal.ssa.SamplePage.Template">
+            <localedata locale="en" prefix="page.sample">
+                <url>file:///$server_root$/base/wp.xml/doc/xml-samples/pagetitles_en.properties</url>
+            </localedata>
+            <localedata locale="de" prefix="page.sample">
+                <url>file:///$server_root$/base/wp.xml/doc/xml-samples/pagetitles_de.properties</url>
+            </localedata>
+            <pagecontents display-option="inline" markup="html"/>
+            <parameter name="com.ibm.portal.bookmarkable" type="string" update="set"><![CDATA[Yes]]></parameter>
+            <parameter name="com.ibm.portal.friendly.name" type="string" update="set"><![CDATA[staticpage2]]></parameter>
+            <!-- this parameter must match the name of static page -->
+            <parameter name="com.ibm.portal.static.page.file.name.html" type="string" update="set"><![CDATA[layout.html]]></parameter>
+            <parameter name="com.ibm.portal.layout.template.ref" type="string" update="set"><![CDATA[dav:fs-type1/layout-templates/2ColumnEqual]]></parameter>
+            <parameter name="resourceaggregation.profile" type="string" update="set">profiles/profile_full.json</parameter>
+            
+            <access-control externalized="false" owner="uid=wpsadmin,o=defaultwimfilebasedrealm" private="false"/>
+            <component action="update" active="true" domain="rel" ordinal="100" orientation="V" type="container">
+                <component action="update" active="true" domain="rel" ordinal="100" orientation="V" type="container"/>
+                <component action="update" active="true" domain="rel" ordinal="100" orientation="H" type="container">
+                    <!-- this parameter must match the portlet-container name in the static page -->
+                    <parameter name="com.ibm.portal.layoutnode.localname" type="string" update="set"><![CDATA[ibmMainContainer]]></parameter>
+                    <component action="update" active="true" domain="rel" ordinal="100" type="control">
+                        <!-- this parameter must match the portlet-window name in the static page -->
+                        <parameter name="com.ibm.portal.layoutnode.localname" type="string" update="set"><![CDATA[portletWindow1]]></parameter>
+                        <portletinstance action="update" domain="rel" portletref="theExamplePortlet" />
+                    </component>
+                </component>
+            </component>
+        </content-node>
+
+    </portal>
+</request>

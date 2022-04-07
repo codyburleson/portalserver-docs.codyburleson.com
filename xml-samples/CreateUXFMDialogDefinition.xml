@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corp. 2014.  All rights reserved.
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM
+ * Corp.
+ *
+ * DISCLAIMER OF WARRANTIES.  The following [enclosed] code is
+ * sample code created by IBM Corporation.  This sample code is
+ * not part of any standard or IBM product and is provided to you
+ * solely for the purpose of assisting you in the development of
+ * your applications.  The code is provided "AS IS", without
+ * warranty of any kind.  IBM shall not be liable for any damages
+ * arising out of your use of the sample code, even if they have
+ * been advised of the possibility of such damages.
+ *
+ =================================================================
+-->
+<request type="update" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="PCM_2.0.xsd">
+
+    <portal action="create">
+    
+        <!-- Please note that this sample cannot be used as-is as the referenced resources do usually not exist (are fictive).
+             Thus, this sample serves as a kind of skeleton only. -->
+             
+        <!-- definition of one or more dialogs -->
+        <dialog-set>
+        
+            <!-- definition of a dialog with unique name dialog1 -->
+            <dialog name="dialog1">
+            
+                <!-- access-control settings that apply to this particular dialog -->
+                <access-control externalized="false" owner="undefined" private="false">
+                    <role actionset="User" update="set">
+                        <mapping subjectid="uid=wpsadmin,o=defaultWIMFileBasedRealm" subjecttype="USER" update="set" />
+                    </role>
+                    <role actionset="Editor" update="set">
+                        <mapping subjectid="uid=wpsadmin,o=defaultWIMFileBasedRealm" subjecttype="USER" update="set" />
+                    </role>
+                </access-control>
+                
+                <!-- default settings that apply if not overwritten by more specific settings further below -->
+                <default-settings>
+                    <transition-endpoint>
+                        <resource parent-uniquename="parent1" />
+                        <invocation type="dynamic" extension-node="extensionNode1" />
+                    </transition-endpoint>
+                </default-settings>                
+            
+                <!-- transition-endpoints this particular dialog will makes use of -->
+                <!-- the transition-endpoint name needs to be unique within this particular dialog -->
+                <transition-endpoint name="diip">
+                    <!-- the resource uniquename needs to refer to an existing resource (page, portlet, etc.) with the specified unique name -->
+                    <resource uniquename="diip" />
+                    <!-- allowed invocation types are static and dynamic -->
+                    <invocation type="static" />
+                </transition-endpoint>
+                
+                <transition-endpoint name="page1">
+                    <!-- custom localized titles and definitions are allowed to be specified -->
+                    <localedata locale="en">
+                        <title>titleEN1</title>
+                        <description>descriptionEN1</description>
+                    </localedata>                
+                    <resource uniquename="page1" />
+                    <invocation type="static" />
+                </transition-endpoint>
+                
+                <transition-endpoint name="page2">
+                    <resource uniquename="page2" />
+                    <invocation type="static" />
+                </transition-endpoint>
+                
+                
+                <!-- transitions this particular dialog makes use of -->
+                <transition>
+                    <!-- transitions are comprised of sources... -->
+                    <source>
+                        <!-- sources needed to reference previously defined transition-endpoints -->
+                        <transition-endpoint nameref="diip">
+                            <!-- the event that should trigger the transition (if emitted by the encapsulating source) -->
+                          <event qname="START" />
+                        </transition-endpoint>
+                    </source>
+                    <!-- ...and targets -->
+                    <target>
+                        <!-- targets needed to reference previously defined transition-endpoints -->
+                        <transition-endpoint nameref="page1">
+                            <!-- the event the target should be initialized with -->
+                          <event qname="targetEvent0" />
+                        </transition-endpoint>
+                    </target>
+                </transition>
+
+                <transition>
+                    <source>
+                        <transition-endpoint nameref="page1">
+                          <!-- making use of dcx-keys and custom mappers --> 
+                          <event qname="sourceEvent1a" dcx-key="sourceEvent1aDCX" mapper-class="sourceEvent1aMapper" />
+                        </transition-endpoint>
+                    </source>
+                    <target>
+                        <transition-endpoint nameref="page2">
+                          <!-- propagating multiple events at once --> 
+                          <event qname="targetEvent1a" dcx-key="targetEvent1aDCX" mapper-class="targetEvent1aMapper" />
+                          <event qname="targetEvent1b" dcx-key="targetEvent1bDCX" mapper-class="targetEvent1bMapper" />
+                        </transition-endpoint>
+                    </target>
+                </transition>
+
+                <transition>
+                    <source>
+                        <transition-endpoint nameref="page2">
+                          <event qname="sourceEvent2" />
+                        </transition-endpoint>
+                    </source>
+                    <target>
+                        <transition-endpoint nameref="diip">
+                          <event qname="END" />
+                        </transition-endpoint>
+                    </target>
+                </transition>
+            </dialog>
+            
+            <!-- (incomplete) definition of a dialog with unique name dialog2 -->
+            <dialog name="dialog2">
+            </dialog>
+
+        </dialog-set>
+    </portal>
+</request>
+

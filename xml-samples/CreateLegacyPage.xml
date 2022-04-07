@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corp. 2003, 2010.  All rights reserved.
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM
+ * Corp.
+ *
+ * DISCLAIMER OF WARRANTIES.  The following [enclosed] code is
+ * sample code created by IBM Corporation.  This sample code is
+ * not part of any standard or IBM product and is provided to you
+ * solely for the purpose of assisting you in the development of
+ * your applications.  The code is provided "AS IS", without
+ * warranty of any kind.  IBM shall not be liable for any damages
+ * arising out of your use of the sample code, even if they have
+ * been advised of the possibility of such damages.
+ *
+ =================================================================
+-->
+
+<request
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="PortalConfig_8.0.0.xsd"
+    type="update"
+    create-oids="true">
+
+    <!-- Sample for creating a legacy page that contains an existing portlet. 
+         This sample is very similar to DeployPortlet; the difference is that the portlet
+         is not deployed (update actions) but only found (locate action).
+         This sample also demonstrates how to set the skin for the new portlet and how 
+         NLS settings (page title and description) can be read from property files. -->
+    <portal action="locate">
+    
+        <skin action="locate" objectid="Standard" uniquename="ibm.portal.85Standard"/>
+        
+        <web-app action="locate" uid="com.ibm.wps.portlets.welcome">
+           <!-- uid must match uid attribute of concrete-portlet-app in portlet.xml -->
+           <portlet-app action="locate" uid="com.ibm.wps.portlets.welcome.1">
+                <!-- name must match content of portlet-name subtag  of concrete-portlet in portlet.xml -->
+                <portlet action="locate" objectid="theExamplePortlet" name="Welcome Portlet">
+                </portlet>
+            </portlet-app>
+        </web-app>
+
+        <!-- Parent element under which the new page is inserted -->
+        <content-node action="locate" objectid="parentPage" uniquename="ibm.portal.Home"/>
+
+
+        <content-node action="update" uniquename="ibm.portal.legacy.SamplePage.2"  ordinal="last" content-parentref="parentPage" active="true" create-type="explicit" type="page">
+            <supported-markup markup="html" update="set"/>
+            <!-- The title and description for the page are read from property files. The property keys must end with the strings
+                 title, description, and keywords. (Pages do not support keywords.) The prefix attribute specifies a string that is
+                 prepended to the property key so that you can keep titles for different resources in the same property file. -->
+            <localedata locale="en" >
+              <title>Legacy page example</title>
+            </localedata>
+
+            <component action="create" ordinal="100" type="container" orientation="H">
+                <component action="create" ordinal="100" type="control" skinref="Standard">
+                    <!-- portletref must match the objectid attribute of portlet -->
+                    <portletinstance action="update" portletref="theExamplePortlet"/>
+                </component>
+            </component>
+        </content-node>
+        
+    </portal>
+</request>

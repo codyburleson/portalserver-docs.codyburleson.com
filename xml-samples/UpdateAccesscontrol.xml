@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corp. 2003, 2010.  All rights reserved.
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM
+ * Corp.
+ *
+ * DISCLAIMER OF WARRANTIES.  The following [enclosed] code is
+ * sample code created by IBM Corporation.  This sample code is
+ * not part of any standard or IBM product and is provided to you
+ * solely for the purpose of assisting you in the development of
+ * your applications.  The code is provided "AS IS", without
+ * warranty of any kind.  IBM shall not be liable for any damages
+ * arising out of your use of the sample code, even if they have
+ * been advised of the possibility of such damages.
+ *
+ =================================================================
+-->
+
+<request
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="PortalConfig_8.0.0.xsd"
+    type="update"
+    create-oids="true">
+
+    <!-- Sample for setting access control on resources.
+    
+         NOTE: This sample file needs to be modified before execution.
+               Update the file specifying existing users and groups.
+
+         NOTE: This sample expects that a page with the unique name 'ibm.portal.SamplePage' exists.
+               For example the DeployPortlet.xml sample creates such a page.
+     -->
+    <portal action="locate">
+
+        <!-- Virtual resources allow you to set access control on all resources of a certain type.
+             The following example assigns the administrator privileges on all user groups -->
+        <virtual-resource action="update" domain="rel" name="USER_GROUPS">
+            <access-control>
+                <role actionset="Administrator" update="set">
+                    <mapping subjectid="wpsadmin" subjecttype="USER" update="set"/>
+                </role>
+            </access-control>
+        </virtual-resource>
+
+        <!-- Set access control on a portlet - the portlet is  not redeployed.
+             The same syntax can be used to set access control on a new deployed portlet -->
+       <web-app action="locate" uid="com.ibm.wps.portlets.welcome">
+          <portlet-app action="locate" uid="com.ibm.wps.portlets.welcome.1">
+              <access-control>
+                  <!-- The user role should not automatically propagate to portlets in this application. -->
+                  <role-block type="propagation" actionset="User"/>
+              </access-control>
+               <portlet action="update" active="true" name="Welcome Portlet">
+                   <access-control>
+                       <!-- Remove all role blocks on this resource. -->
+                       <role-block type="none"/>
+                       <role actionset="Administrator" update="set">
+                           <!-- depending on your directory used, the DN must be changed -->
+                           <mapping subjectid="uid=wpsadmin,o=defaultwimfilebasedrealm" subjecttype="USER" update="set"/>
+                       </role>
+                       <role actionset="Privileged User" update="set">
+                           <mapping subjectid="all authenticated portal users" subjecttype="USER_GROUP" update="set"/>
+                       </role>
+                       <role actionset="User" update="set">
+                           <mapping subjectid="anonymous portal user" subjecttype="USER" update="set"/>
+                       </role>
+                   </access-control>
+               </portlet>
+           </portlet-app>
+       </web-app>
+
+       <!-- Set access control on a page - the layout of the page is not modified.
+            The same syntax can be used to set access control on a new created page. -->
+       <content-node action="update" uniquename="ibm.portal.ssa.SamplePage">
+            <access-control>
+                <!-- The manager role should not be inherited automatically from parents of this page.  -->
+                <role-block type="inheritance" actionset="Manager"/>
+                <!-- The manager role is set explicitly on this page. -->
+                <role actionset="Manager" update="set">
+                    <mapping subjectid="wpsadmin" subjecttype="USER" update="set"/>
+                </role>
+                <role actionset="User" update="set">
+                    <mapping subjectid="anonymous portal user" subjecttype="USER" update="set"/>
+                </role>
+            </access-control>
+        </content-node>
+
+    </portal>
+</request>

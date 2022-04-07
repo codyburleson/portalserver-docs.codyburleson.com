@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+* Licensed Materials - Property of HCL                             
+ *                                                                  
+ * Copyright HCL Technologies Ltd. 2001, 2020. All Rights Reserved. 
+ *                                                                  
+ * Note to US Government Users Restricted Rights:                   
+ *                                                                  
+ * Use, duplication or disclosure restricted by GSA ADP Schedule    
+ *
+ * DISCLAIMER OF WARRANTIES.  The following [enclosed] code is
+ * sample code created by HCL Corporation.  This sample code is
+ * not part of any standard or HCL product and is provided to you
+ * solely for the purpose of assisting you in the development of
+ * your applications.  The code is provided "AS IS", without
+ * warranty of any kind.  HCL shall not be liable for any damages
+ * arising out of your use of the sample code, even if they have
+ * been advised of the possibility of such damages.
+ *
+ =================================================================
+-->
+
+<request
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="PortalConfig_8.5.0.xsd"
+    type="export"
+    dam-collections="true">
+    
+    <!-- Example for using the * wildcard to export all resources of a given type. This script exports all
+         DAM Collections (access control) that are defined in the portal. -->
+         <portal action="locate">
+            <dam-collection objectid="*" action="export"/>
+        </portal>
+</request>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corp. 2003, 2010.  All rights reserved.
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM
+ * Corp.
+ *
+ * DISCLAIMER OF WARRANTIES.  The following [enclosed] code is
+ * sample code created by IBM Corporation.  This sample code is
+ * not part of any standard or IBM product and is provided to you
+ * solely for the purpose of assisting you in the development of
+ * your applications.  The code is provided "AS IS", without
+ * warranty of any kind.  IBM shall not be liable for any damages
+ * arising out of your use of the sample code, even if they have
+ * been advised of the possibility of such damages.
+ *
+ =================================================================
+-->
+
+<request xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" create-oids="true" type="update" xsi:noNamespaceSchemaLocation="PortalConfig_8.0.0.xsd">
+    <portal action="locate">
+    	<!-- If we'd like another portlet on the page, we'd need to specify it here. -->
+        <web-app action="locate" domain="rel" objectid="Z1_NBV6J7T01GJF102SINIUOGNO00" uid="com.ibm.wps.cp.portlet.tagcloud.webmod">
+
+            <portlet-app action="locate" domain="rel"  uid="com.ibm.wps.cp.portlet.tagcloud">
+                <portlet action="locate" domain="rel" name="Tag Cloud" objectid="Z3_NBV6J7T01GJF102SINIUOG3P00"/>
+            </portlet-app>
+        </web-app>
+        <content-node action="locate" domain="rel" objectid="Z6_000000000000000000000000A0" uniquename="wps.content.root"/>
+        <content-node action="locate" domain="rel" objectid="Z6_NBV6J7T01GJF102SINIUOG3D10" uniquename="ibm.portal.Home"/>
+        <!-- objectid is removed. It will be created.-->
+	<content-node action="update" active="true" allportletsallowed="true" content-parentref="Z6_NBV6J7T01GJF102SINIUOG3D10" create-type="explicit" domain="rel" ordinal="1000" type="staticpage" uniquename="ibm.portal.ssa.AnotherSamplePage">
+            <localedata locale="en">
+            	<!-- updated the title -->
+                <title>Copied Sample Page</title>
+            </localedata>
+            <!-- The content of static page in binary format 
+                 attribute markup can be set to one of portal server supported markups
+                 attribute display-option can be set to "inline" or "iframe" or "ajax".-->
+            <pagecontents markup="html" display-option="inline">
+                <content>UEsDBBQACAAIALKbTDcAAAAAAAAAAAAAAAALAAAAaW5kZXgxLmh0bWxtUE1rwzAMvQf6H0TuTeh1
+ZL7stFsghZ5VW2sEjmxir1n//YTdbDAGOoj3IelpmAmdOTRD5uzJTLhETzBlzGxhxBsNfWVU0u/a
+a3APc9AmmvPMCbQQUvVE9QB9lTkdFLpAMyYIQhDDquPyu6heLMGFvA0LwVjxDurcHX7Khz6WhY7v
+YD2m9No+maMNkpGF1hYEF/oh3nb81Jr/nRuLC9sf26WAp1bzPPwvfHT0wcKZg7xsMXWx2y88B81w
+neJMa02BvizsdWO5uTZNiTV6wkRw58QZPvVtNz2xhFNdfWvzDVBLBwjDeEQR4AAAAJMBAABQSwEC
+FAAUAAgACACym0w3w3hEEeAAAACTAQAACwAAAAAAAAAAAAAAAAAAAAAAaW5kZXgxLmh0bWxQSwUG
+AAAAAAEAAQA5AAAAGQEAAAAA</content>
+            </pagecontents>
+            <parameter name="com.ibm.portal.bookmarkable" type="string" update="set"><![CDATA[Yes]]></parameter>
+	    <parameter name="resourceaggregation.profile" type="string" update="set"><![CDATA[profiles/profile_dojo_lightweight.json]]></parameter>
+            <parameter name="com.ibm.portal.friendly.name" type="string" update="set"><![CDATA[staticpage2]]></parameter>
+            <!-- this parameter must match the name of static page -->
+            <parameter name="com.ibm.portal.static.page.file.name.html" type="string" update="set"><![CDATA[index1.html]]></parameter>
+            <access-control externalized="false" owner="uid=wpsadmin,o=defaultwimfilebasedrealm" private="false"/>
+            <component action="update" active="true" domain="rel" ordinal="100" orientation="V" type="container">
+                <component action="update" active="true" domain="rel" ordinal="100" orientation="V" type="container"/>
+                <component action="update" active="true" domain="rel" ordinal="100" orientation="H" type="container">
+                    <!-- this parameter must match the portlet-container name in the static page -->
+                    <parameter name="com.ibm.portal.layoutnode.localname" type="string" update="set"><![CDATA[portletContainer1]]></parameter>
+                    <component action="update" active="true" domain="rel" ordinal="100" type="control">
+                        <!-- this parameter must match the portlet-window name in the static page -->
+                        <parameter name="com.ibm.portal.layoutnode.localname" type="string" update="set"><![CDATA[portletWindow1]]></parameter>
+                        <portletinstance action="update" domain="rel" portletref="Z3_NBV6J7T01GJF102SINIUOG3P00" />
+                    </component>
+                </component>
+            </component>
+        </content-node>
+    </portal>
+</request>

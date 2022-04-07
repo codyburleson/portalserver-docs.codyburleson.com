@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corp. 2009.  All rights reserved.
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM
+ * Corp.
+ *
+ * DISCLAIMER OF WARRANTIES.  The following [enclosed] code is
+ * sample code created by IBM Corporation.  This sample code is
+ * not part of any standard or IBM product and is provided to you
+ * solely for the purpose of assisting you in the development of
+ * your applications.  The code is provided "AS IS", without
+ * warranty of any kind.  IBM shall not be liable for any damages
+ * arising out of your use of the sample code, even if they have
+ * been advised of the possibility of such damages.
+ *
+ =================================================================
+-->
+
+<request
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="PortalConfig_8.0.0.xsd"
+    type="update">
+
+    <!-- This sample creates ratings and tags.
+    
+         Related sample files:
+             ExportTagsAndRatings.xml 
+             DeleteTagsAndRatings.xml
+             
+    
+         NOTE: This sample file needs to be modified before execution.
+               Update the value of the 'owner' attributes of the 'access-control',
+               'rating', and 'tag' tags, and specify an existing user. 
+    -->
+     
+    <portal action="locate">
+
+        <!-- uid must match uid attribute of portlet-app in portlet.xml -->
+        <web-app action="locate" domain="rel" uid="BlurbPortlet.3088d83ae7690017105c9e64cce97eb8">
+            <servlet action="locate" domain="rel" referenceid="Portlet_1"/>
+            <portlet-app action="locate" domain="rel" name="Information Portlet Application" uid="BlurbPortlet.3088d83ae7690017105c9e64cce97eb8.1">
+                <!-- uniquename must match with portlet uniquename -->
+                <portlet action="locate" domain="rel" name="Welcome to WebSphere Portal" objectid="portlet1" uniquename="wps.p.Welcome To WebSphere Portal"/>
+            </portlet-app>
+        </web-app>
+        
+        <!-- Parent element under which a new page for this sample is inserted. -->
+        <content-node action="locate" objectid="parentPage" uniquename="ibm.portal.Home"/>
+
+        <!-- A new empty page to which a tag and rating are assigned. -->
+        <content-node action="update" objectid="samplePageOID" uniquename="ibm.portal.SamplePage.TagsAndRatings" ordinal="last" content-parentref="parentPage" active="true" create-type="explicit" type="staticpage">
+            <supported-markup markup="html" update="set"/>
+            <localedata locale="en">
+                <title>Sample page for tag and rating creation</title>
+            </localedata>
+            <!-- The content of static page are read from zip file.
+            attribute markup can be set to one of portal server supported markups
+            attribute display-option can be set to "inline" or "iframe" or "ajax".-->
+            <pagecontents markup="html" display-option="inline">
+                <url>file:///$server_root$/base/wp.xml/doc/xml-samples/index1.zip</url>
+            </pagecontents>
+            <!-- this parameter must match the name of static page -->
+            <parameter name="com.ibm.portal.static.page.file.name.html" type="string" update="set"><![CDATA[index1.html]]></parameter>
+            <access-control externalized="false" owner="uid=wpsadmin,o=defaultwimfilebasedrealm" private="false" />
+            <component action="update" active="true" domain="rel" ordinal="100" orientation="V" type="container">
+            	<component action="update" active="true" domain="rel" ordinal="100" orientation="V" type="container">
+            		<!--  this parameter must match the portlet-container name in the static page -->
+            		<parameter name="com.ibm.portal.layoutnode.localname" type="string" update="set"><![CDATA[portletContainer1]]></parameter>
+            		<component action="update" active="true" domain="rel" ordinal="100" type="control">
+            			<!-- this parameter must match the portlet-window name in the static page -->
+            			<parameter name="com.ibm.portal.layoutnode.localname" type="string" update="set"><![CDATA[portletWindow1]]></parameter>
+            			<portletinstance action="update" domain="rel" portletref="portlet1" />
+            		</component>
+            	</component>
+            </component>
+        </content-node>
+
+
+        <!-- A custom resource can be used to assign tags and ratings to resources that are not managed by XMLAccess, but can be identified by an URI -->
+        <custom-resource action="update" objectid="ZCH_B1L68B1A00DO80IG7PCV0I1000" uri="book:mySampleBookURI">
+            <category-instance action="update" name="cookbook"/>
+            <category-instance action="update" name="hardcover"/>
+        </custom-resource>
+
+        <!-- Assignment of a rating value of 5 by user wpsadmin to the sample page -->
+        <rating action="update" objectid="ZCJ_B1L68B1A00DO80IG7PCV0I2000" resourceref="samplePageOID" domain="comm" value="5" owner="uid=wpsadmin,o=defaultwimfilebasedrealm" />
+        <!-- Assignment of a rating value of 5 to the custom resource -->
+        <rating action="update" objectid="ZCJ_B1L68B1A00DO80IG7PCV0I3000" resourceref="ZCH_B1L68B1A00DO80IG7PCV0I1000" domain="comm" value="5" owner="uid=wpsadmin,o=defaultwimfilebasedrealm"/>
+
+        <!-- Assignment of the tag 'sample' to the sample page -->
+        <tag action="update" objectid="ZCI_B1L68B1A00DO80IG7PCV0I4000" resourceref="samplePageOID" domain="comm" owner="uid=wpsadmin,o=defaultwimfilebasedrealm" locale="en">sample</tag>
+        <!-- Assignment of the tag 'sample' to the custom resource -->
+        <tag action="update" objectid="ZCI_B1L68B1A00DO80IG7PCV0I5000" resourceref="ZCH_B1L68B1A00DO80IG7PCV0I1000" domain="comm" owner="uid=wpsadmin,o=defaultwimfilebasedrealm" locale="en">sample</tag>
+
+    </portal>
+</request>
